@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuchaMania Game Board</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Main Game Container -->
+    <div id="gameContainer" class="game-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">🎭 LUCHMANIA 🎭</h1>
+            <div class="scoreboard">
+                <div class="team team-1">
+                    <input type="text" id="team1Name" class="team-name-input" value="Team 1" placeholder="Team 1">
+                    <div class="score" id="team1Score">0</div>
+                </div>
+                <div class="timer-display">
+                    <div class="timer" id="timer">30</div>
+                    <div class="timer-label">SECONDS</div>
+                </div>
+                <div class="team team-2">
+                    <input type="text" id="team2Name" class="team-name-input" value="Team 2" placeholder="Team 2">
+                    <div class="score" id="team2Score">0</div>
+                </div>
+            </div>
+            <div class="turn-tracker">
+                <span class="turn-label">CURRENT TURN:</span>
+                <span class="turn-team" id="currentTurn">Team 1</span>
+            </div>
+        </header>
+
+        <!-- Game Board -->
+        <main class="game-board">
+            <div id="boardContainer" class="board-container">
+                <!-- Categories and Questions will be dynamically generated -->
+            </div>
+        </main>
+
+        <!-- Question Modal -->
+        <div id="questionModal" class="modal hidden">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeQuestion()">&times;</button>
+                <div class="modal-header">
+                    <h2 id="categoryDisplay">Category</h2>
+                    <span class="points-display" id="pointsDisplay">100 Points</span>
+                </div>
+                
+                <!-- Question Phase -->
+                <div id="questionPhase" class="phase">
+                    <p class="question-text" id="questionText">Question will appear here...</p>
+                    <button class="reveal-btn" onclick="revealAnswer()">REVEAL ANSWER</button>
+                </div>
+
+                <!-- Answer Phase -->
+                <div id="answerPhase" class="phase hidden">
+                    <p class="answer-text" id="answerText">Answer will appear here...</p>
+                    <div class="answer-buttons">
+                        <button class="award-btn correct-btn" onclick="awardPoints(true)">✓ CORRECT</button>
+                        <button class="award-btn incorrect-btn" onclick="awardPoints(false)">✗ INCORRECT</button>
+                    </div>
+                </div>
+
+                <!-- Special Space Phase -->
+                <div id="specialPhase" class="phase hidden">
+                    <div id="specialContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner Screen -->
+        <div id="winnerScreen" class="winner-screen hidden">
+            <div class="winner-content">
+                <h1 class="winner-title">🏆 CHAMPION 🏆</h1>
+                <h2 class="winner-name" id="winnerName">Team 1</h2>
+                <p class="winner-score" id="winnerScore">Score: 0</p>
+                <button class="play-again-btn" onclick="resetGame()">PLAY AGAIN</button>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <footer class="control-panel">
+            <button id="resetBtn" class="btn btn-reset" onclick="resetGame()">RESET GAME</button>
+            <button id="endGameBtn" class="btn btn-end" onclick="endGame()">END GAME</button>
+            <div class="google-sheets-section">
+                <input type="text" id="sheetsUrl" placeholder="Paste Google Sheets Share URL" class="sheets-input">
+                <button class="btn btn-load" onclick="loadFromGoogleSheets()">LOAD FROM SHEETS</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="correctSound" src="assets/sounds/correct.mp3"></audio>
+    <audio id="incorrectSound" src="assets/sounds/incorrect.mp3"></audio>
+    <audio id="timerWarningSound" src="assets/sounds/timer-warning.mp3"></audio>
+    <audio id="whamnySound" src="assets/sounds/whammy.mp3"></audio>
+
+    <script src="js/main.js"></script>
+    <script src="js/sounds.js"></script>
+</body>
+</html>
